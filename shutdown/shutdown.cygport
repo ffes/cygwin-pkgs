@@ -1,0 +1,21 @@
+NAME="shutdown"
+VERSION="1.10"
+RELEASE=1
+CATEGORY="Admin"
+SUMMARY="Shutdown, reboot, hibernate or suspend the machine"
+DESCRIPTION="Shutdown, reboot, hibernate or suspend the machine"
+HOMEPAGE="http://cygwin.com/"
+
+CVS_URI=":pserver:anoncvs@cygwin.com:/cvs/cygwin-apps"
+CVS_BRANCH="rel${PV//\./-}"
+inherit cvs
+
+src_compile() {
+	cd ${B}
+	make -f ${S}/Makefile SRCDIR=${S}
+}
+
+src_install() {
+	cd ${B}
+	make install -f ${S}/Makefile SRCDIR=${S} DESTDIR=${D}
+}
