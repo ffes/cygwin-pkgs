@@ -1,0 +1,32 @@
+NAME="rsync"
+VERSION="3.1.1pre1"
+#VERSION="3.0.9"
+RELEASE=1
+CATEGORY="Net"
+SUMMARY="Fast remote file transfer program (can use existing data to minimize transfer)"
+DESCRIPTION="rsync is a file transfer program. rsync uses the 'rsync algorithm' which provides a very fast method for bringing remote files into sync. It does this by sending just the differences in the files across the link, without requiring that both sets of files are present at one of the ends of the link beforehand."
+HOMEPAGE="http://rsync.samba.org/"
+SRC_URI="http://rsync.samba.org/ftp/rsync/src-previews/${P}.tar.gz"
+#SRC_URI="http://rsync.samba.org/ftp/rsync/src/${P}.tar.gz"
+
+DIFF_EXCLUDES="*.test"
+
+#PATCH_URI+="
+#	rsync-configure-1.patch
+#"
+
+src_compile() {
+    cd ${S}
+    cygautoreconf
+    ln configure ${B}/configure.sh
+    cd ${B}
+    cygconf
+    cygmake
+}
+
+src_install() {
+    cd ${B}
+    cyginstall
+    cd ${S}
+    doman rsync.1 rsyncd.conf.5
+}
