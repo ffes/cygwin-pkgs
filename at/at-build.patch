@@ -1,0 +1,31 @@
+diff -crB at-3.1.14/getloadavg.c at/getloadavg.c
+*** at-3.1.14/getloadavg.c	2013-09-08 14:43:53.000000000 +0200
+--- at/getloadavg.c	2014-03-19 09:47:56.158588200 +0100
+***************
+*** 69,76 ****
+--- 69,78 ----
+  #include <config.h>
+  #endif
+  
++ #ifndef __CYGWIN__
+  #include "lisp.h"
+  #include "sysfile.h" /* for encapsulated open, close, read, write */
++ #endif
+  
+  #ifndef HAVE_GETLOADAVG
+  
+diff -crB at-3.1.14/parsetime.h at/parsetime.h
+*** at-3.1.14/parsetime.h	2013-09-08 14:43:53.000000000 +0200
+--- at/parsetime.h	2014-03-19 09:48:12.158188000 +0100
+***************
+*** 21,23 ****
+--- 21,29 ----
+  
+  extern char *last_token;
+  extern char **my_argv;
++ 
++ #ifndef __isleap
++ /* Nonzero if YEAR is a leap year (every 4 years, except every 100th isn't, and every 400th is).  */
++ #define __isleap(year)  \
++     ((year) % 4 == 0 && ((year) % 100 != 0 || (year) % 400 == 0))
++ #endif

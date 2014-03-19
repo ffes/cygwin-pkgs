@@ -1,0 +1,29 @@
+NAME="at"
+VERSION="3.1.14"
+RELEASE=1
+CATEGORY="Admin"
+SUMMARY="Delayed job execution and batch processing"
+DESCRIPTION="Delayed job execution and batch processing"
+HOMEPAGE="http://packages.qa.debian.org/a/at.html"
+SRC_URI="mirror://debian/pool/main/${PN:0:1}/${PN}/${PN}_${PV}.orig.tar.gz"
+
+PATCH_URI+="
+	at-build.patch
+	at-export.patch
+	at-install.patch
+"
+
+src_compile() {
+	cd ${S}
+	cygautoreconf
+	ln configure ${B}/configure.sh
+	cd ${B}
+	cygconf SENDMAIL=/usr/sbin/sendmail --with-daemon_username=Frank --with-daemon_groupname=Domeingebruikers
+	cygmake
+}
+
+src_install() {
+	cd ${B}
+	cyginstall
+	cd ${S}
+}
