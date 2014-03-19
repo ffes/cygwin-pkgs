@@ -57,7 +57,7 @@
   	touch $(IROOT)$(LFILE)
   	chmod 600 $(IROOT)$(LFILE)
   	chown $(DAEMON_USERNAME):$(DAEMON_GROUPNAME) $(IROOT)$(LFILE)
-! 	test -f $(IROOT)$(etcdir)/at.allow || test -f $(IROOT)$(etcdir)/at.deny || $(INSTALL) -o $(DAEMON_GROUPNAME) -g $(DAEMON_GROUPNAME) -m 640 at.deny $(IROOT)$(etcdir)/
+! 	test -f $(IROOT)$(etcdir)/at.allow || test -f $(IROOT)$(etcdir)/at.deny || $(INSTALL) -o $(DAEMON_USERNAME) -g $(DAEMON_GROUPNAME) -m 640 at.deny $(IROOT)$(etcdir)/
   	$(INSTALL) -g $(DAEMON_GROUPNAME) -o $(DAEMON_USERNAME) -m 6755 at $(IROOT)$(bindir)
   	$(LN_S) -f at $(IROOT)$(bindir)/atq
   	$(LN_S) -f at $(IROOT)$(bindir)/atrm
