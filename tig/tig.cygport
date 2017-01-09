@@ -1,0 +1,29 @@
+#
+# Cygport file to create Cygwin package for "tig"
+#
+# Dev-requires: libiconv-devel gettext-devel
+#
+
+NAME="tig"
+VERSION="2.2.1"
+RELEASE=1
+CATEGORY="Utils"
+SUMMARY="Curses based git repository browser"
+DESCRIPTION="A command line repository browser capable of displaying a summarized revision log and showing commit log messages, diffstats and diffs. Program may also be used as a pager. It reads input from stdin and colorizes it."
+HOMEPAGE="https://jonas.github.io/tig/"
+SRC_URI="https://github.com/jonas/tig/releases/download/${P}/${P}.tar.gz"
+REQUIRES="git"
+DIFF_EXCLUDES=".deps config.make builtin-config.c"
+
+src_compile() {
+	cd ${S}
+	cygautoreconf
+	cygconf
+	cygmake
+}
+
+src_install() {
+	cd ${S}
+	cyginstall
+	doman tig.1 tigrc.5 tigmanual.7
+}
