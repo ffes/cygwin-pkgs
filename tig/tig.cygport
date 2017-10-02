@@ -5,7 +5,7 @@
 #
 
 NAME="tig"
-VERSION="2.2.2"
+VERSION="2.3.0"
 RELEASE=1
 CATEGORY="Utils"
 SUMMARY="Curses based git repository browser"
